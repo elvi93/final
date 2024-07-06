@@ -25,8 +25,9 @@
           >
             {{ task.isCompleted ? "Completed" : "Mark as Completed" }}
           </button>
-          <button @click="editTask(task)" id="plus">Edit Task</button>
-          <button @click="deleteTask(task.id)">Delete Task</button>
+          <button id="plus" @click="editTask(task)" >Edit Task</button>
+          <button id="remove" @click="deleteTask(task.id)
+          ">Delete Task</button>
         </div>
         <div v-if="task.id === editingTaskId">
           <h5>Edit Task</h5>

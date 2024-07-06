@@ -23,7 +23,8 @@ It manages user authentication states, displays navigation links conditionally b
           <RouterLink to="/all-tasks">All Tasks</RouterLink>
           <RouterLink to="/completed-tasks">Completed Tasks</RouterLink>
           <RouterLink to="/add-task">Add New Task</RouterLink>
-          <button @click="handleSignOut">Sign Out</button>
+          <button @click="handleSignOut"
+          >Sign Out</button>
         </template>
       </nav>
     </div>
