@@ -27,7 +27,6 @@
           </button>
           <button @click="editTask(task)">Edit Task</button>
           <button @click="deleteTask(task.id)">Delete Task</button>
-          <button class="plus">helloo</button>
         </div>
         <div v-if="task.id === editingTaskId">
           <h5>Edit Task</h5>
