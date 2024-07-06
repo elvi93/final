@@ -1,15 +1,14 @@
-# global-state-with-piniajs
+### Git Combinators 
 
-### What are life-cycle hooks in Vue.js
 
-Lifecycle hooks in Vue are special functions that run at different stages of a component's life. Think of them as moments when Vue lets you do something specific when creating, updating, or destroying a component
+Use these to save a bit of time when pushing updates to github. 
 
-### IF YOU DO NOT UNDERSTAND THE FILE THAT YOU ARE LOOKING
+#### Update
+git add . && git commit -m "update - " && git push origin main 
 
-USE THIS PROMPT
+#### Delete
+git add . && git commit -m "deleted - " && git push origin main 
 
-ChatGPT PROMPT:
+#### Create
+git add . && git commit -m "created - " && git push origin main 
 
-Analyse the following file containing [vue syntax] and I want you to provide to me a summary detailing what this whole file is doing and also, add comments to each line of syntax describing what that line is doing to enhance my understanding.
-
-FILE:

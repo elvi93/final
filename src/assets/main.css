@@ -37,6 +37,21 @@ button.completed:hover {
 
 }
 
+/* Btn Test */
+
+/* Green */
+.plus{
+  background: #10c40d80 
+}
+
+/* Green */
+.red{
+  background: #c40d0d80 
+}
+
+
+
+
 @media (min-width: 1024px) {
   body {
     display: flex;
