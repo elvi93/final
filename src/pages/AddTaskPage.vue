@@ -38,7 +38,7 @@ By building this component, we will achieve a user interface that allows users t
         <div>
           <label for="extraInfo">Extra Info Required:</label>
           <input v-model="newExtraInfo" type="text" id="extraInfo" />
-          <button type="button" @click="addExtraInfo">Add Info</button>
+          <button id="plus" type="button" @click="addExtraInfo">Add Info</button>
           <ul>
             <li
               v-for="(info, index) in newTask.description.extraInfoRequired"
@@ -51,7 +51,7 @@ By building this component, we will achieve a user interface that allows users t
             </li>
           </ul>
         </div>
-        <button type="submit">Add Task</button>
+        <button id="plus" type="submit">Add Task</button>
       </form>
     </div>
   </div>

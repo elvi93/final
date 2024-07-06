@@ -46,8 +46,8 @@
             v-model="taskToUpdate.description.extraInfoRequired[index]"
             placeholder="Extra Info"
           />
-          <button @click="saveTaskChanges">Save</button>
-          <button @click="cancelEdit">Cancel</button>
+          <button id="plus" @click="saveTaskChanges">Save</button>
+          <button id="remove" @click="cancelEdit">Cancel</button>
         </div>
       </li>
     </ul>

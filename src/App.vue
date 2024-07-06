@@ -7,7 +7,7 @@ It manages user authentication states, displays navigation links conditionally b
   <header>
     <div class="wrapper">
       <!-- Display a welcome message using the HelloWorld component -->
-      <HelloWorld msg="Final Boiler Plate" />
+      <HelloWorld msg="Task Manager" />
 
       <!-- Navigation links -->
       <nav>
