@@ -7,26 +7,27 @@ It manages user authentication states, displays navigation links conditionally b
   <header>
     <div class="wrapper">
       <!-- Display a welcome message using the HelloWorld component -->
-      <HelloWorld msg="Task Manager" />
+      <HelloWorld msg="Task Manager " />
 
       <!-- Navigation links -->
-      <nav>
-        <template v-if="!isLoggedIn">
-          <!-- If the user is not logged in, show these links -->
-          <RouterLink to="/auth/login">Login</RouterLink>
-          <RouterLink to="/auth/register">Register</RouterLink>
-        </template>
-        <template v-else>
-          <!-- If the user is logged in, show these links -->
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/all-tasks">All Tasks</RouterLink>
-          <RouterLink to="/completed-tasks">Completed Tasks</RouterLink>
-          <RouterLink to="/add-task">Add New Task</RouterLink>
-          <button id="remove" @click="handleSignOut"
-          >Sign Out</button>
-        </template>
-      </nav>
+   <nav class="navbar">
+    <ul>
+      <template v-if="!isLoggedIn">
+        <!-- If the user is not logged in, show these links -->
+        <li><RouterLink to="/auth/login">Login</RouterLink></li>
+        <li><RouterLink to="/auth/register">Register</RouterLink></li>
+      </template>
+      <template v-else>
+        <!-- If the user is logged in, show these links -->
+        <li><RouterLink to="/">Home</RouterLink></li>
+        <li><RouterLink to="/about">About</RouterLink></li>
+        <li><RouterLink to="/all-tasks">All Tasks</RouterLink></li>
+        <li><RouterLink to="/completed-tasks">Completed Tasks</RouterLink></li>
+        <li><RouterLink to="/add-task">Add New Task</RouterLink></li>
+        <button id="remove" @click="handleSignOut">Sign Out</button>
+      </template>
+    </ul>
+  </nav>
     </div>
   </header>
 

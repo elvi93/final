@@ -90,8 +90,8 @@ button {
   display: block;
   margin-bottom: 0.5rem;
 }
-#plus:hover {
-  background-color: hsla(160, 100%, 37%, 0.2);
+button.completed:hover {
+  background-color: hsla(160, 100%, 37%, 0.5) !important; /* Keep the same background color on hover */
 }
 
 </style>

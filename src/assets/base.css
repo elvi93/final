@@ -54,7 +54,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
+  margin: 5px;
   font-weight: normal;
 }
 
@@ -79,7 +79,7 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
+  font-size: 1.2em;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,5 +1,55 @@
+/* Import base styles */
 @import "./base.css";
 
+/* Additional Navbar Styles */
+
+body {
+  background-color: rgb(195, 204, 172);
+}
+
+.navbar {
+  padding: 1rem; /* Padding around the navbar */
+}
+
+.navbar ul {
+  list-style-type: none; /* Remove default list styling */
+  display: flex; /* Display list items in a row */
+  justify-content: space-around; /* Distribute items evenly */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.navbar li {
+  margin: 0 1rem; /* Margin between list items */
+}
+
+.navbar a {
+  text-decoration: none; /* Remove underline from links */
+  color: rgb(11, 125, 87); /* Link text color */
+  font-weight: bold; /* Bold text */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.navbar a:hover {
+  color: rgb(11, 125, 87); /* Darker shade for hover effect */
+}
+
+.navbar button {
+  background-color: transparent; /* Transparent background for button */
+  border: 2px solid rgb(11, 125, 87); /* Main color border */
+  color: rgb(11, 125, 87); /* Button text color */
+  padding: 0.5rem 1rem; /* Padding inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+  border-radius: 4px; /* Border radius for button */
+}
+
+.navbar button:hover {
+  background-color: hsla(160, 100%, 37%, 1); /* Main color background on hover */
+  color: white; /* White text color on hover */
+}
+
+/* Global App Styles */
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -10,7 +60,7 @@
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: rgb(3, 58, 40);
   transition: 0.4s;
   padding: 3px;
 }
@@ -20,28 +70,34 @@ a,
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 
-  
   #remove:hover {
     background-color: hsla(19, 97%, 43%, 0.627);
   }
-#plus:hover {
-  background-color: hsla(160, 100%, 37%, 0.2);
+
+  #plus:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+
+  /* Remove hover effects for completed buttons */
+  button.completed,
+  input[type="button"].completed,
+  input[type="reset"].completed,
+  input[type="submit"].completed {
+    background-color: hsla(160, 100%, 37%, 0.5); /* Lighter background color */
+    color: white; /* White text color */
+    cursor: default; /* Default cursor */
+  }
+
+  /* Hover state should not change for completed buttons */
+  button.completed:hover,
+  input[type="button"].completed:hover,
+  input[type="reset"].completed:hover,
+  input[type="submit"].completed:hover {
+    background-color: hsla(160, 100%, 37%, 0.5); /* Maintain the same background color */
+    color: white; /* Maintain the same text color */
+    transform: none; /* No transform on hover */
+  }
 }
-
-button.completed {
-  background-color: hsla(160, 100%, 37%, 0.5);
-  cursor: default; /* Prevents the pointer cursor on hover */
-}
-
-button.completed:hover {
-  background-color: hsla(160, 100%, 37%, 0.5) !important; /* Keep the same background color on hover */
-}
-
-}
-
-
-
-
 
 @media (min-width: 1024px) {
   body {
@@ -56,16 +112,14 @@ button.completed:hover {
   }
 }
 
-/* Imnported from about.vue page */
-
+/* Styles imported from about.vue page */
 @media (min-width: 1024px) {
   .container {
     align-items: center;
   }
 }
 
-/* Imported from app.vue */
-
+/* Styles imported from app.vue */
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -101,54 +155,25 @@ nav a:first-of-type {
   border: 0;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+/* Add border and styling to all buttons */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  border: 2px solid rgb(11, 125, 87); /* Main color border */
+  background-color: transparent; /* Transparent background for button */
+  color: rgb(11, 125, 87); /* Button text color */
+  padding: 0.5rem 1rem; /* Padding inside the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
+  border-radius: 4px; /* Border radius for button */
 }
 
-/* Imported from HelloWorld.vue comp */
-
-h1 {
-  font-weight: 500;
-  font-size: 1.5rem;
-  position: relative;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  background-color: hsla(160, 100%, 37%, 1); /* Main color background on hover */
+  color: white; /* White text color on hover */
+  transform: translateY(-3px); /* Move button 3px up on hover */
 }
