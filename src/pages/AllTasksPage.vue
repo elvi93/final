@@ -18,14 +18,14 @@
         </ul>
         <h6>{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
         <div>
-          <button
+          <button id="plus"
             :class="{ completed: task.isCompleted }"
             :disabled="task.isCompleted"
             @click="markTaskCompleted(task.id)"
           >
             {{ task.isCompleted ? "Completed" : "Mark as Completed" }}
           </button>
-          <button @click="editTask(task)">Edit Task</button>
+          <button @click="editTask(task)" id="plus">Edit Task</button>
           <button @click="deleteTask(task.id)">Delete Task</button>
         </div>
         <div v-if="task.id === editingTaskId">
@@ -88,6 +88,9 @@ function cancelEdit() {
 button {
   display: block;
   margin-bottom: 0.5rem;
+}
+#plus:hover {
+  background-color: hsla(160, 100%, 37%, 0.2);
 }
 
 </style>
