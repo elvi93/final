@@ -91,6 +91,31 @@ export const useTaskStore = defineStore("taskStore", () => {
   */
 
   // ----------------------------------------------------------------------
+  // Function to mark a task as incomplete
+  // ----------------------------------------------------------------------
+
+  /**
+   * Marks a specific task as incomplete.
+   * @param {number} taskId - The ID of the task to be marked as incomplete.
+   */
+  function markTaskIncomplete(taskId) {
+    // Find the task by its ID
+    let task = tasks.find((task) => task.id === taskId);
+    // If task is found, mark it as incomplete
+    if (task) {
+      task.isCompleted = false; // Set the task's isCompleted property to false
+    }
+  }
+
+  /*
+  The markTaskIncomplete function is used to mark a specific task as incomplete.
+  - It takes a taskId as a parameter.
+  - It finds the task in the tasks array that has the same id as the taskId.
+  - If a task with the specified id is found, it sets the isCompleted property of that task to false.
+  - This function allows for changing the state of a task to reflect its incompletion status.
+  */
+
+  // ----------------------------------------------------------------------
   // Function to delete a task
   // ----------------------------------------------------------------------
 
@@ -165,6 +190,7 @@ export const useTaskStore = defineStore("taskStore", () => {
     tasks,
     addTask,
     markTaskCompleted,
+    markTaskIncomplete,
     deleteTask,
     updateTaskInStore,
     getTasksByUserId,
