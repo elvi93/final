@@ -112,7 +112,7 @@ export const useTaskStore = defineStore("taskStore", () => {
   - It takes a taskId as a parameter.
   - It finds the task in the tasks array that has the same id as the taskId.
   - If a task with the specified id is found, it sets the isCompleted property of that task to false.
-  - This function allows for changing the state of a task to reflect its incompletion status.
+  - This function allows for changing the state of a task to reflect its incomplete status.
   */
 
   // ----------------------------------------------------------------------

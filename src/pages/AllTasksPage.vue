@@ -27,7 +27,7 @@
           </button>
           <button id="plus" @click="editTask(task)">Edit Task</button>
           <button id="remove" @click="deleteTask(task.id)">Delete Task</button>
-          <button id="plus" v-if="task.isCompleted" @click="markTaskIncomplete(task.id)">Mark as Incomplete</button>
+          <button id="remove" v-if="task.isCompleted" @click="markTaskIncomplete(task.id)">Mark as Incomplete</button>
         </div>
         <div v-if="task.id === editingTaskId">
           <h5>Edit Task</h5>
@@ -58,40 +58,32 @@
 import { ref } from "vue";
 import { useTaskStore } from "../stores/taskStore";
 
+// Accessing the task store
 const taskstore = useTaskStore();
 const { tasks, deleteTask, markTaskCompleted, markTaskIncomplete, updateTaskInStore } = taskstore;
 
+// Vue reactive variables for managing task editing
 const editingTaskId = ref(null);
 const taskToUpdate = ref(null);
 let originalTask = ref(null);
 
+// Function to initiate task editing
 function editTask(task) {
-  editingTaskId.value = task.id; // wE ARE ASSINING THE id that you receive from the functionParam called 'task' and then we assing the .id of that specific task into the vue-reactive variable using reff calledd editingTaskId
-  taskToUpdate.value = { ...task }; // Clone task object to prevent direct mutation
+  editingTaskId.value = task.id;
+  taskToUpdate.value = { ...task };
   originalTask.value = { ...task }; // Keep a copy of the original task for comparison
 }
 
-// EVERYTIME YOU SEE THE ... LIKE YOU HAVE ON LINE 68, THATS AN INDICATOR THAT WHATEVER IS TO THE RIGHT SIDE OF THE LAST DOT IS SPREADING/CREATING-A-COPY OF THE VALUE THAT THE DOTS ARE CONNECTED TO. 
-// SO IN SIMPLER TERMS,THE 3 DOTS OF LINE 68 ARE COPYING THE CONTENTS OF THAT SPECIFIC TASK THAT IS BEING RECEIVED AS A PROP. 
-
+// Function to save changes to a task
 function saveTaskChanges() {
   console.log("Saving changes for task:", taskToUpdate.value);
-  if (checkIfTaskEdited(originalTask.value, taskToUpdate.value)) {
-    taskToUpdate.value.isCompleted = false; // Mark task as incomplete if it has been edited
-  }
-  updateTaskInStore(taskToUpdate.value); // Update task in global store
+  taskToUpdate.value.isCompleted = false; // Mark task as incomplete regardless of changes
+  updateTaskInStore(taskToUpdate.value); // Update task in the global store
   console.log("Tasks after update:", tasks);
-  cancelEdit();
+  cancelEdit(); // Exit edit mode
 }
 
-function checkIfTaskEdited(originalTask, updatedTask) {
-  return (
-    originalTask.description.title !== updatedTask.description.title ||
-    originalTask.description.timeToBeCompleted !== updatedTask.description.timeToBeCompleted ||
-    JSON.stringify(originalTask.description.extraInfoRequired) !== JSON.stringify(updatedTask.description.extraInfoRequired)
-  );
-}
-
+// Function to cancel editing
 function cancelEdit() {
   editingTaskId.value = null;
   taskToUpdate.value = null;
