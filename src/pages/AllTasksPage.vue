@@ -25,9 +25,8 @@
           >
             {{ task.isCompleted ? "Completed" : "Mark as Completed" }}
           </button>
-          <button id="plus" @click="editTask(task)" >Edit Task</button>
-          <button id="remove" @click="deleteTask(task.id)
-          ">Delete Task</button>
+          <button id="plus" @click="editTask(task)">Edit Task</button>
+          <button id="remove" @click="deleteTask(task.id)">Delete Task</button>
         </div>
         <div v-if="task.id === editingTaskId">
           <h5>Edit Task</h5>
@@ -93,5 +92,4 @@ button {
 button.completed:hover {
   background-color: hsla(160, 100%, 37%, 0.5) !important; /* Keep the same background color on hover */
 }
-
 </style>
