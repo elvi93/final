@@ -74,10 +74,28 @@ function editTask(task) {
   originalTask.value = { ...task }; // Keep a copy of the original task for comparison
 }
 
+// Utility function to compare two task objects
+function areTasksEqual(task1, task2) {
+  return (
+    task1.title === task2.title &&
+    task1.description.title === task2.description.title &&
+    task1.description.timeToBeCompleted === task2.description.timeToBeCompleted &&
+    JSON.stringify(task1.description.extraInfoRequired) === JSON.stringify(task2.description.extraInfoRequired)
+  );
+}
+
 // Function to save changes to a task
 function saveTaskChanges() {
   console.log("Saving changes for task:", taskToUpdate.value);
-  taskToUpdate.value.isCompleted = false; // Mark task as incomplete regardless of changes
+
+  // Compare the updated task with the original task
+  const isTaskChanged = !areTasksEqual(taskToUpdate.value, originalTask.value);
+
+  // If the task has changed, mark it as incomplete
+  if (isTaskChanged) {
+    taskToUpdate.value.isCompleted = false;
+  }
+
   updateTaskInStore(taskToUpdate.value); // Update task in the global store
   console.log("Tasks after update:", tasks);
   cancelEdit(); // Exit edit mode
