@@ -74,7 +74,7 @@ function editTask(task) {
   originalTask.value = { ...task }; // Keep a copy of the original task for comparison
 }
 
-// Function to compare two task objects
+// Utility function to compare two task objects
 function areTasksEqual(task1, task2) {
   return (
     task1.title === task2.title &&
@@ -82,6 +82,7 @@ function areTasksEqual(task1, task2) {
     task1.description.timeToBeCompleted === task2.description.timeToBeCompleted &&
     JSON.stringify(task1.description.extraInfoRequired) === JSON.stringify(task2.description.extraInfoRequired)
   );
+}
 
 // Function to save changes to a task
 function saveTaskChanges() {
