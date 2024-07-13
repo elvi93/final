@@ -77,7 +77,7 @@ function editTask(task) {
 // Utility function to compare two task objects
 function areTasksEqual(task1, task2) {
   return (
-    //task1.title === task2.title &&
+    task1.title === task2.title &&
     task1.description.title === task2.description.title &&
     task1.description.timeToBeCompleted === task2.description.timeToBeCompleted &&
     JSON.stringify(task1.description.extraInfoRequired) === JSON.stringify(task2.description.extraInfoRequired)
