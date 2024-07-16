@@ -99,4 +99,42 @@ button {
 button.completed:hover {
   background-color: hsla(160, 100%, 37%, 0.5) !important; /* Keep the same background color on hover */
 }
+
+.container ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+  gap: 1rem; /* Gap between cards */
+}
+
+.container li {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
+  border-radius: 8px; /* Rounded corners */
+  padding: 1rem; /* Padding inside the card */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+}
+
+@media (max-width: 768px) {
+  .container ul {
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+  }
+}
+
+.container h5,
+.container h6 {
+  margin: 0.5rem 0; /* Margin between text elements */
+}
+
+.container button {
+  margin-top: 0.5rem; /* Space between buttons and content */
+}
+
+.container .extra-info {
+  margin-top: 0.5rem; /* Space between extra info list and other content */
+}
+
 </style>

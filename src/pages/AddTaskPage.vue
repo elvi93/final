@@ -45,7 +45,7 @@ By building this component, we will achieve a user interface that allows users t
               :key="index"
             >
               {{ info }}
-              <button type="button" @click="removeExtraInfo(index)">
+              <button id="remove" type="button" @click="removeExtraInfo(index)">
                 Remove
               </button>
             </li>

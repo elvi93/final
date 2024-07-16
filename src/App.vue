@@ -4,13 +4,13 @@ It manages user authentication states, displays navigation links conditionally b
 -->
 
 <template>
-  <header>
+  <header class="up top">
     <div class="wrapper">
-      <!-- Display a welcome message using the HelloWorld component -->
-      <HelloWorld msg="Task Manager " />
-
-      <!-- Navigation links -->
-   <nav class="navbar">
+  <div class="hello-world">
+    <!-- Display a welcome message using the HelloWorld component -->
+    <HelloWorld msg="Task Manager" />
+  </div>
+  <nav class="navbar">
     <ul>
       <template v-if="!isLoggedIn">
         <!-- If the user is not logged in, show these links -->
@@ -24,11 +24,13 @@ It manages user authentication states, displays navigation links conditionally b
         <li><RouterLink to="/all-tasks">All Tasks</RouterLink></li>
         <li><RouterLink to="/completed-tasks">Completed Tasks</RouterLink></li>
         <li><RouterLink to="/add-task">Add New Task</RouterLink></li>
-        <button id="remove" @click="handleSignOut">Sign Out</button>
+        <button id="remove" class="out"  @click="handleSignOut">Sign Out</button>
       </template>
     </ul>
+    
   </nav>
-    </div>
+</div>
+
   </header>
 
   <!-- RouterView to display the current route's component -->
