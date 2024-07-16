@@ -5,13 +5,15 @@ By building this component, we will achieve a user interface that allows users t
 
 <template>
   <div class="container">
-    <h3 class="header-title">Log In to ToDo App</h3>
+    <h3 class="header-title">Log In to ToDo Apppppp</h3>
+    <BeakerIcon class="icon-test" />
+   
     <!-- FORM GOES HERE -->
     <form @submit.prevent="signIn">
       <div class="form">
         <!-- Email Input -->
-        <label
-          >Email
+        
+        <label>E-mail <EnvelopeIcon class="icon-test" /> 
           <input id="email" type="text" v-model="formState.email" />
         </label>
         <!-- Password Input -->
@@ -37,6 +39,7 @@ By building this component, we will achieve a user interface that allows users t
         class="sign-up-link"
       />
     </p>
+   
   </div>
 </template>
 
@@ -50,7 +53,8 @@ import { useRouter } from "vue-router";
 import PersonalRouter from "./PersonalRouter.vue";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
-
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { EnvelopeIcon} from '@heroicons/vue/24/outline'
 // ------------------------------------------------------------------------
 // Variables Block
 // ------------------------------------------------------------------------
@@ -118,5 +122,10 @@ input {
 
 button {
   margin: 0.5rem 0;
+}
+.icon-test{
+  width: 24px;
+  height: 24px;
+  color: red
 }
 </style>

@@ -10,27 +10,29 @@ It manages user authentication states, displays navigation links conditionally b
     <!-- Display a welcome message using the HelloWorld component -->
     <HelloWorld msg="Task Manager" />
   </div>
-  <nav class="navbar">
-    <ul>
-      <template v-if="!isLoggedIn">
-        <!-- If the user is not logged in, show these links -->
-        <li><RouterLink to="/auth/login">Login</RouterLink></li>
-        <li><RouterLink to="/auth/register">Register</RouterLink></li>
-      </template>
-      <template v-else>
-        <!-- If the user is logged in, show these links -->
-        <li><RouterLink to="/">Home</RouterLink></li>
-        <li><RouterLink to="/about">About</RouterLink></li>
-        <li><RouterLink to="/all-tasks">All Tasks</RouterLink></li>
-        <li><RouterLink to="/completed-tasks">Completed Tasks</RouterLink></li>
-        <li><RouterLink to="/add-task">Add New Task</RouterLink></li>
-        <button id="remove" class="out"  @click="handleSignOut">Sign Out</button>
-      </template>
-    </ul>
-    
-  </nav>
-</div>
-
+    <!-- Hamburger menu icon -->
+    <div class="menu-toggle" @click="toggleMenu">
+      <i class="fa-solid fa-bars"></i>
+      </div>
+      <nav class="navbar" :class="{ 'active': isMenuOpen }">
+        <ul>
+          <template v-if="!isLoggedIn">
+            <!-- If the user is not logged in, show these links -->
+            <li><RouterLink to="/auth/login">Login</RouterLink></li>
+            <li><RouterLink to="/auth/register">Register</RouterLink></li>
+          </template>
+          <template v-else>
+            <!-- If the user is logged in, show these links -->
+            <li><RouterLink to="/">Home</RouterLink></li>
+            <li><RouterLink to="/about">About</RouterLink></li>
+            <li><RouterLink to="/all-tasks">All Tasks</RouterLink></li>
+            <li><RouterLink to="/completed-tasks">Completed Tasks</RouterLink></li>
+            <li><RouterLink to="/add-task">Add New Task</RouterLink></li>
+            <li><button id="remove" class="out" @click="handleSignOut">Sign Out</button></li>
+          </template>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- RouterView to display the current route's component -->
@@ -65,6 +67,11 @@ const userStore = useUserStore();
 const { user, isLoggedIn } = storeToRefs(userStore);
 // Reactive variable to hide/show elements based on user login status
 const isUserloggedIn = ref(false);
+const isMenuOpen = ref(false); // Reactive variable for menu visibility
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 // ------------------------------------------------------------------------
 // Lifecycle Hook: onMounted

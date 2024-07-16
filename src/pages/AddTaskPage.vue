@@ -4,7 +4,7 @@ By building this component, we will achieve a user interface that allows users t
 -->
 
 <template>
-  <div>
+  <div class="container">
     <h1>Add New Task</h1>
     <!-- v-if directive to show success message if taskAdded is true, otherwise show the form -->
     <div v-if="taskAdded">

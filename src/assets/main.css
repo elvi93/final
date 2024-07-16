@@ -1,12 +1,14 @@
 /* Import base styles */
 @import "./base.css";
 
+
+
 /* Additional Navbar Styles */
 
 body {
-  background-color: rgb(195, 204, 172);
   margin: 0;
   padding: 0;
+  background-color: rgb(195, 204, 172);
 }
 
 .container {
@@ -22,7 +24,8 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000; /* Ensure the navbar stays on top */
-  background-color: rgb(195, 204, 172);}
+  background-color: rgb(195, 204, 172);
+}
 
 .hello-world {
   margin-left: 20px; /* Adjust spacing between HelloWorld component and nav */
@@ -71,12 +74,39 @@ body {
   color: white; /* White text color on hover */
 }
 
+.menu-toggle {
+  display: none; /* Hide by default on larger screens */
+  cursor: pointer;
+}
+
+.menu-toggle .icon {
+  width: 30px;
+  height: 3px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.menu-toggle.active .icon:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active .icon:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .icon:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
 /* Global App Styles */
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+  position: relative; /* Ensure it stays within the document flow */
+  top: 0; /* Position from the top of the viewport */
 }
 
 a,
@@ -198,4 +228,41 @@ input[type="submit"]:hover {
   background-color: hsla(160, 100%, 37%, 1); /* Main color background on hover */
   color: white; /* White text color on hover */
   transform: translateY(-3px); /* Move button 3px up on hover */
+}
+
+@media (max-width: 790px) {
+  /* Show hamburger menu toggle on smaller screens */
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1000;
+  }
+
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: rgb(195, 204, 172);
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar.active {
+    display: block;
+  }
+
+  .navbar ul {
+    flex-direction: column; /* Display list items in a column */
+    align-items: center; /* Center align items */
+    margin: 1rem 0; /* Add margin between list items */
+    padding: 1rem; /* Maintain padding */
+  }
+
+  .navbar button {
+    margin-top: 1rem; /* Add margin to the sign out button */
+  }
 }
