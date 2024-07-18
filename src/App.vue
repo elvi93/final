@@ -6,13 +6,13 @@ It manages user authentication states, displays navigation links conditionally b
 <template>
   <header class="up top">
     <div class="wrapper">
-  <div class="hello-world">
-    <!-- Display a welcome message using the HelloWorld component -->
-    <HelloWorld msg="Task Manager" />
-  </div>
-    <!-- Hamburger menu icon -->
-    <div class="menu-toggle" @click="toggleMenu">
-      <i class="fa-solid fa-bars"></i>
+      <div class="hello-world">
+        <!-- Display a welcome message using the HelloWorld component -->
+        <HelloWorld msg="Task Manager" />
+      </div>
+      <!-- Hamburger menu icon -->
+      <div class="menu-toggle" @click="toggleMenu">
+        <BarsArrowDownIcon class="bars" />
       </div>
       <nav class="navbar" :class="{ 'active': isMenuOpen }">
         <ul>
@@ -54,7 +54,7 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 // Import useUserStore to access user-related data
 import { useUserStore } from "../src/stores/user";
-
+import { BarsArrowDownIcon } from "@heroicons/vue/24/outline"; // Ensure correct path and component
 // ------------------------------------------------------------------------
 // Variable Definition Block
 // ------------------------------------------------------------------------
@@ -126,9 +126,3 @@ let handleSignOut = () => {
 
 // Additional lifecycle hooks such as onBeforeMount and onUpdated can be added here if needed.
 </script>
-
-<!-- 
-What is storeToRefs?
-In order to extract properties from the store while keeping its reactivity, you need to use storeToRefs(). It will create refs for every reactive property. This is useful when you are only using state from the store but not calling any action. Note you can destructure actions directly from the store as they are bound to the store itself too.
-Link: https://pinia.vuejs.org/core-concepts/
--->

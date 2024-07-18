@@ -132,6 +132,11 @@ export const useUserStore = defineStore("user", () => {
       user.value = storedUser;
       profile.value = getFromLocalStorage("profile");
       isLoggedIn.value = true;
+
+      // Store user data in local storage
+      localStorage.setItem("user", JSON.stringify(user.value));
+      localStorage.setItem("profile", JSON.stringify(profile.value));
+      localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn.value));
     } else {
       throw new Error("User not found or password incorrect");
     }
@@ -158,6 +163,7 @@ export const useUserStore = defineStore("user", () => {
     isLoggedIn.value = false;
     localStorage.removeItem("user");
     localStorage.removeItem("profile");
+    localStorage.removeItem("isLoggedIn");
   };
 
   /*

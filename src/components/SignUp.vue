@@ -17,38 +17,47 @@ By building this component, we will achieve a user interface that allows users t
         <!-- Email Input Field -->
         <div class="form-input">
           <label class="input-field-label">E-mail</label>
-          <input
-            type="email"
-            class="input-field"
-            placeholder="example@gmail.com"
-            id="email"
-            v-model="formState.email"
-            required
-          />
+          <div class="input-wrapper">
+            <EnvelopeIcon class="icon-inside" />
+            <input
+              type="email"
+              class="input-field"
+              placeholder="example@gmail.com"
+              id="email"
+              v-model="formState.email"
+              required
+            />
+          </div>
         </div>
         <!-- Password Input Field -->
         <div class="form-input">
           <label class="input-field-label">Password</label>
-          <input
-            type="password"
-            class="input-field"
-            placeholder="**********"
-            id="password"
-            v-model="formState.password"
-            required
-          />
+          <div class="input-wrapper">
+            <EyeSlashIcon class="icon-inside" />
+            <input
+              type="password"
+              class="input-field"
+              placeholder="**********"
+              id="password"
+              v-model="formState.password"
+              required
+            />
+          </div>
         </div>
         <!-- Confirm Password Input Field -->
         <div class="form-input">
           <label class="input-field-label">Confirm password</label>
-          <input
-            type="password"
-            class="input-field"
-            placeholder="**********"
-            id="confirmPassword"
-            v-model="formState.confirmPassword"
-            required
-          />
+          <div class="input-wrapper">
+            <EyeSlashIcon class="icon-inside" />
+            <input
+              type="password"
+              class="input-field"
+              placeholder="**********"
+              id="confirmPassword"
+              v-model="formState.confirmPassword"
+              required
+            />
+          </div>
         </div>
         <!-- Sign Up Button -->
         <button class="button" type="submit">Sign Up</button>
@@ -59,6 +68,7 @@ By building this component, we will achieve a user interface that allows users t
             :route="goToRoute"
             :buttonText="buttonText"
             class="sign-up-link"
+            id="plus"
           />
         </p>
       </div>
@@ -82,6 +92,8 @@ import { useRouter } from "vue-router";
 import PersonalRouter from "./PersonalRouter.vue";
 // Importing the useUserStore function from userStore to interact with the user store
 import { useUserStore } from "../stores/user";
+// Importing icons
+import { EnvelopeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline';
 
 // ------------------------------------------------------------------------
 // Variables Block
@@ -145,6 +157,37 @@ const signUp = () => {
   */
 </script>
 
-<style>
-/* Style section remains unchanged */
+<style scoped>
+label,
+input {
+  display: block;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon-inside {
+  position: absolute;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  color: rgb(195, 204, 172);
+}
+
+.input-field {
+  padding-left: 32px; /* Adjust the padding to make space for the icon */
+}
+
+button {
+  margin: 0.5rem 0;
+}
+
+.icon-test {
+  width: 24px;
+  height: 24px;
+  color: rgb(195, 204, 172);
+}
 </style>

@@ -99,6 +99,7 @@ body {
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
+
 /* Global App Styles */
 #app {
   max-width: 1280px;
@@ -265,4 +266,12 @@ input[type="submit"]:hover {
   .navbar button {
     margin-top: 1rem; /* Add margin to the sign out button */
   }
+
+  .bars {
+    width: 24px;
+    height: 24px;
+    color: black; /* Ensure the icon has a color */
+    cursor: pointer;
+  }
+  
 }

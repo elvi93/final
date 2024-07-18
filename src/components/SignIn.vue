@@ -12,14 +12,18 @@ By building this component, we will achieve a user interface that allows users t
     <form @submit.prevent="signIn">
       <div class="form">
         <!-- Email Input -->
-        
-        <label>E-mail <EnvelopeIcon class="icon-test" /> 
-          <input id="email" type="text" v-model="formState.email" />
+        <label>E-mail
+          <div class="input-wrapper">
+            <EnvelopeIcon class="icon-inside" />
+            <input id="email" type="text" v-model="formState.email" />
+          </div>
         </label>
         <!-- Password Input -->
-        <label
-          >Password
-          <input id="password" type="password" v-model="formState.password" />
+        <label>Password
+          <div class="input-wrapper">
+            <EyeSlashIcon class="icon-inside" />
+            <input id="password" type="password" v-model="formState.password" />
+          </div>
         </label>
         <!-- Button -->
         <!-- I personally like semantic elements, I think they are easier to read as an engineer -->
@@ -28,7 +32,7 @@ By building this component, we will achieve a user interface that allows users t
     </form>
     <!-- END FORM -->
     <!-- Error Message Here -->
-    <p v-show="formState.errorMsg">{{ formState.errorMsg }}</p>
+    <p class="error" v-show="formState.errorMsg">{{ formState.errorMsg }}</p>
     <!-- END Error Message -->
 
     <p>
@@ -39,7 +43,6 @@ By building this component, we will achieve a user interface that allows users t
         class="sign-up-link"
       />
     </p>
-   
   </div>
 </template>
 
@@ -54,7 +57,7 @@ import PersonalRouter from "./PersonalRouter.vue";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { EnvelopeIcon} from '@heroicons/vue/24/outline'
+import { EnvelopeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 // ------------------------------------------------------------------------
 // Variables Block
 // ------------------------------------------------------------------------
@@ -120,12 +123,34 @@ input {
   display: block;
 }
 
+.error{
+  color: red;
+}
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon-inside {
+  position: absolute;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  color: rgb(195, 204, 172);
+}
+
+input {
+  padding-left: 32px; /* Adjust the padding to make space for the icon */
+}
+
 button {
   margin: 0.5rem 0;
 }
-.icon-test{
+
+.icon-test {
   width: 24px;
   height: 24px;
-  color: red
+  color: rgb(195, 204, 172);
 }
 </style>
