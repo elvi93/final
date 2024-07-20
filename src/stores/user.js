@@ -132,11 +132,6 @@ export const useUserStore = defineStore("user", () => {
       user.value = storedUser;
       profile.value = getFromLocalStorage("profile");
       isLoggedIn.value = true;
-
-      // Store user data in local storage
-      localStorage.setItem("user", JSON.stringify(user.value));
-      localStorage.setItem("profile", JSON.stringify(profile.value));
-      localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn.value));
     } else {
       throw new Error("User not found or password incorrect");
     }
@@ -163,7 +158,6 @@ export const useUserStore = defineStore("user", () => {
     isLoggedIn.value = false;
     localStorage.removeItem("user");
     localStorage.removeItem("profile");
-    localStorage.removeItem("isLoggedIn");
   };
 
   /*
@@ -192,8 +186,34 @@ export const useUserStore = defineStore("user", () => {
   */
 
   // ----------------------------------------------------------------------
-  // Return statement to export all pieces of data or functions globally
+  // Function to update username
   // ----------------------------------------------------------------------
+
+  /**
+   * Updates the username of the current user.
+   * @param {string} newUsername - The new username.
+   */
+  async function updateUsername(newUsername) {
+    if (profile.value) {
+      profile.value.username = newUsername;
+      saveToLocalStorage("profile", profile.value);
+    }
+  }
+
+  /*
+  The updateUsername function updates the username of the current user.
+  - It takes a new username as a parameter.
+  - It updates the username in the profile reactive reference and saves it to local storage.
+  */
+
+  // ----------------------------------------------------------------------
+  // Return Statement
+  // ----------------------------------------------------------------------
+
+  /*
+  The return statement exports the user store functions and reactive references
+  to be used in other parts of the application.
+  */
   return {
     user,
     profile,
@@ -203,13 +223,6 @@ export const useUserStore = defineStore("user", () => {
     signIn,
     signOut,
     getTasksForUser,
+    updateUsername,
   };
 });
-
-/*
-Summary:
-This file defines a Pinia store for managing user authentication and profile information in a Vue.js application.
-It includes functions to register, sign in, sign out, and fetch user-specific tasks from the task store. The state 
-management is reactive, ensuring that any changes to the user data are automatically reflected in the Vue.js components 
-that use this store.
-*/

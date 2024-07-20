@@ -1,13 +1,18 @@
 <template>
+  <!-- Header for the tasks page -->
   <h4>This Page Displays all tasks</h4>
 
   <div class="container">
     <!-- Loop through the tasks array and render each task in a list item -->
     <ul>
       <li v-for="task in tasks" :key="task.id">
+        <!-- Task details -->
         <h5>{{ task.title }}</h5>
         <h6>{{ task.description.title }}</h6>
         <h6>{{ task.description.timeToBeCompleted }}</h6>
+        <!-- Display due date if it exists -->
+        <h6 v-if="task.dueDate">Due Date: {{ task.dueDate }}</h6>
+        <!-- List of extra info required -->
         <ul>
           <li
             v-for="(extraInfo, index) in task.description.extraInfoRequired"
@@ -16,9 +21,12 @@
             {{ extraInfo }}
           </li>
         </ul>
+        <!-- Display task completion status -->
         <h6>{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
+        <!-- Button actions for task management -->
         <div>
-          <button id="plus"
+          <button
+            id="plus"
             :class="{ completed: task.isCompleted }"
             :disabled="task.isCompleted"
             @click="markTaskCompleted(task.id)"
@@ -27,9 +35,18 @@
           </button>
           <button id="plus" @click="editTask(task)">Edit Task</button>
           <button id="remove" @click="deleteTask(task.id)">Delete Task</button>
-          <button id="remove" v-if="task.isCompleted" @click="markTaskIncomplete(task.id)">Mark as Incomplete</button>
+          <!-- Option to mark completed tasks as incomplete -->
+          <button
+            id="remove"
+            v-if="task.isCompleted"
+            @click="markTaskIncomplete(task.id)"
+          >
+            Mark as Incomplete
+          </button>
         </div>
+        <!-- Edit task section -->
         <div v-if="task.id === editingTaskId">
+          <!-- Edit task form -->
           <h5>Edit Task</h5>
           <input v-model="taskToUpdate.title" placeholder="Title" />
           <input
@@ -40,12 +57,20 @@
             v-model="taskToUpdate.description.timeToBeCompleted"
             placeholder="Time to be Completed"
           />
+          <!-- Input field for setting due date -->
+          <input
+            type="date"
+            v-model="taskToUpdate.dueDate"
+            placeholder="Due Date"
+          />
+          <!-- Loop through extra info required -->
           <input
             v-for="(info, index) in taskToUpdate.description.extraInfoRequired"
             :key="index"
             v-model="taskToUpdate.description.extraInfoRequired[index]"
             placeholder="Extra Info"
           />
+          <!-- Save and cancel buttons -->
           <button id="plus" @click="saveTaskChanges">Save</button>
           <button id="remove" @click="cancelEdit">Cancel</button>
         </div>
@@ -58,54 +83,54 @@
 import { ref } from "vue";
 import { useTaskStore } from "../stores/taskStore";
 
-// Accessing the task store
+// Access the task store
 const taskstore = useTaskStore();
+// Destructure necessary functions and data from the task store
 const { tasks, deleteTask, markTaskCompleted, markTaskIncomplete, updateTaskInStore } = taskstore;
 
-// Vue reactive variables for managing task editing
-const editingTaskId = ref(null);
-const taskToUpdate = ref(null);
-let originalTask = ref(null);
+// Define reactive variables for task editing
+const editingTaskId = ref(null); // Holds the ID of the task being edited
+const taskToUpdate = ref(null); // Holds the task object being updated
+let originalTask = ref(null); // Holds the original task object before editing
 
 // Function to initiate task editing
 function editTask(task) {
-  editingTaskId.value = task.id;
-  taskToUpdate.value = { ...task };
-  originalTask.value = { ...task }; // Keep a copy of the original task for comparison
+  editingTaskId.value = task.id; // Set the editingTaskId to the ID of the task being edited
+  taskToUpdate.value = { ...task }; // Create a copy of the task to update
+  originalTask.value = { ...task }; // Create a copy of the original task before editing
 }
 
-// Utility function to compare two task objects
+// Function to check if two tasks are equal
 function areTasksEqual(task1, task2) {
   return (
     task1.title === task2.title &&
     task1.description.title === task2.description.title &&
     task1.description.timeToBeCompleted === task2.description.timeToBeCompleted &&
-    JSON.stringify(task1.description.extraInfoRequired) === JSON.stringify(task2.description.extraInfoRequired)
+    JSON.stringify(task1.description.extraInfoRequired) === JSON.stringify(task2.description.extraInfoRequired) &&
+    task1.dueDate === task2.dueDate // Compare due dates
   );
 }
 
-// Function to save changes to a task
+// Function to save changes made to a task
 function saveTaskChanges() {
   console.log("Saving changes for task:", taskToUpdate.value);
 
-  // Compare the updated task with the original task
-  const isTaskChanged = !areTasksEqual(taskToUpdate.value, originalTask.value);
+  const isTaskChanged = !areTasksEqual(taskToUpdate.value, originalTask.value); // Check if there are any changes
 
-  // If the task has changed, mark it as incomplete
   if (isTaskChanged) {
-    taskToUpdate.value.isCompleted = false;
+    taskToUpdate.value.isCompleted = false; // Set isCompleted to false if changes were made
   }
 
-  updateTaskInStore(taskToUpdate.value); // Update task in the global store
-  console.log("Tasks after update:", tasks);
-  cancelEdit(); // Exit edit mode
+  updateTaskInStore(taskToUpdate.value); // Update the task in the store
+  console.log("Tasks after update:", tasks); // Log updated tasks to console
+  cancelEdit(); // Cancel editing mode after saving
 }
 
-// Function to cancel editing
+// Function to cancel editing a task
 function cancelEdit() {
-  editingTaskId.value = null;
-  taskToUpdate.value = null;
-  originalTask.value = null;
+  editingTaskId.value = null; // Reset editingTaskId to null
+  taskToUpdate.value = null; // Reset taskToUpdate to null
+  originalTask.value = null; // Reset originalTask to null
 }
 </script>
 
@@ -114,45 +139,45 @@ button {
   display: block;
   margin-bottom: 0.5rem;
 }
+
 button.completed:hover {
-  background-color: hsla(160, 100%, 37%, 0.5) !important; /* Keep the same background color on hover */
+  background-color: hsla(160, 100%, 37%, 0.5) !important;
 }
 
 .container ul {
-  list-style-type: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-  gap: 1rem; /* Gap between cards */
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .container li {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
-  border-radius: 8px; /* Rounded corners */
-  padding: 1rem; /* Padding inside the card */
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* Align items vertically */
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
   .container ul {
-    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+    grid-template-columns: 1fr;
   }
 }
 
 .container h5,
 .container h6 {
-  margin: 0.5rem 0; /* Margin between text elements */
+  margin: 0.5rem 0;
 }
 
 .container button {
-  margin-top: 0.5rem; /* Space between buttons and content */
+  margin-top: 0.5rem;
 }
 
 .container .extra-info {
-  margin-top: 0.5rem; /* Space between extra info list and other content */
+  margin-top: 0.5rem;
 }
-
 </style>

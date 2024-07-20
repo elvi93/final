@@ -14,6 +14,7 @@ import AllTasksPage from "../pages/AllTasksPage.vue";
 import CompletedTasksPage from "../pages/CompletedTasksPage.vue";
 import AddTaskPage from "../pages/AddTaskPage.vue";
 import AuthPage from "../pages/AuthPage.vue";
+import ProfilePage from "../pages/user.vue";
 // Import components for nested routes
 import SignIn from "../components/SignIn.vue";
 import SignUp from "../components/SignUp.vue";
@@ -52,6 +53,12 @@ const router = createRouter({
       path: "/add-task", // Path for the add task page
       name: "add new task page", // Name of the route
       component: AddTaskPage, // Component to render
+    },
+
+    {
+      path: "/profile/:username",  //Path to usermenu
+      name: "profile",
+      component: ProfilePage,
     },
     // Nested routes for authentication
     {

@@ -36,6 +36,15 @@ By building this component, we will achieve a user interface that allows users t
           />
         </div>
         <div>
+          <label for="dueDate">Due Date:</label>
+          <input
+            v-model="newTask.dueDate"
+            type="date"
+            id="dueDate"
+            required
+          />
+        </div>
+        <div>
           <label for="extraInfo">Extra Info Required:</label>
           <input v-model="newExtraInfo" type="text" id="extraInfo" />
           <button id="plus" type="button" @click="addExtraInfo">Add Info</button>
@@ -88,6 +97,7 @@ const newTask = reactive({
     timeToBeCompleted: "", // Time required to complete the new task
     extraInfoRequired: [], // Array for additional information required for the task
   },
+  dueDate: "", // Due date for the new task
   isCompleted: false, // Initial completion status of the new task
 });
 
@@ -146,6 +156,7 @@ const resetForm = () => {
   newTask.title = ""; // Clear the title field
   newTask.description.title = ""; // Clear the description title field
   newTask.description.timeToBeCompleted = ""; // Clear the time to be completed field
+  newTask.dueDate = ""; // Clear the due date field
   newTask.description.extraInfoRequired = []; // Clear the extra info required array
 };
 
@@ -154,6 +165,7 @@ const resetForm = () => {
   - It clears the title field by setting newTask.title to an empty string.
   - It clears the description title field by setting newTask.description.title to an empty string.
   - It clears the time to be completed field by setting newTask.description.timeToBeCompleted to an empty string.
+  - It clears the due date field by setting newTask.dueDate to an empty string.
   - It clears the extra info required array by setting newTask.description.extraInfoRequired to an empty array.
   */
 
@@ -169,3 +181,4 @@ const startNewTask = () => {
   - It sets taskAdded to false to hide the success message and display the form again.
   */
 </script>
+

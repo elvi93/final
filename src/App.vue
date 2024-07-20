@@ -14,6 +14,7 @@ It manages user authentication states, displays navigation links conditionally b
       <div class="menu-toggle" @click="toggleMenu">
         <BarsArrowDownIcon class="bars" />
       </div>
+      <!-- Navigation links -->
       <nav class="navbar" :class="{ 'active': isMenuOpen }">
         <ul>
           <template v-if="!isLoggedIn">
@@ -28,6 +29,10 @@ It manages user authentication states, displays navigation links conditionally b
             <li><RouterLink to="/all-tasks">All Tasks</RouterLink></li>
             <li><RouterLink to="/completed-tasks">Completed Tasks</RouterLink></li>
             <li><RouterLink to="/add-task">Add New Task</RouterLink></li>
+            <li>
+              <!-- Make "Logged in as {{ profile.username }}" clickable and link to a user profile page -->
+              <RouterLink :to="`/profile/${profile.username}`">{{ profile.username }}</RouterLink>
+            </li>
             <li><button id="remove" class="out" @click="handleSignOut">Sign Out</button></li>
           </template>
         </ul>
@@ -47,7 +52,7 @@ It manages user authentication states, displays navigation links conditionally b
 // Import the HelloWorld component
 import HelloWorld from "./components/HelloWorld.vue";
 // Import ref, onMounted, and onBeforeMount from Vue
-import { ref, onMounted, onBeforeMount } from "vue";
+import { ref, onMounted } from "vue";
 // Import storeToRefs from Pinia to keep reactivity
 import { storeToRefs } from "pinia";
 // Import useRouter from vue-router for navigation
@@ -55,6 +60,7 @@ import { useRouter } from "vue-router";
 // Import useUserStore to access user-related data
 import { useUserStore } from "../src/stores/user";
 import { BarsArrowDownIcon } from "@heroicons/vue/24/outline"; // Ensure correct path and component
+
 // ------------------------------------------------------------------------
 // Variable Definition Block
 // ------------------------------------------------------------------------
@@ -64,10 +70,13 @@ const router = useRouter();
 // Store user accessed easily here
 const userStore = useUserStore();
 // Destructure the variable 'user' and 'isLoggedIn' out of the store, keeping their reactivity using storeToRefs
-const { user, isLoggedIn } = storeToRefs(userStore);
-// Reactive variable to hide/show elements based on user login status
-const isUserloggedIn = ref(false);
-const isMenuOpen = ref(false); // Reactive variable for menu visibility
+const { user, isLoggedIn, profile } = storeToRefs(userStore);
+// Reactive variable for menu visibility
+const isMenuOpen = ref(false);
+
+// ------------------------------------------------------------------------
+// Function to toggle menu visibility
+// ------------------------------------------------------------------------
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -79,7 +88,6 @@ const toggleMenu = () => {
 
 // Using the onMounted lifecycle hook to perform actions when the component is mounted
 onMounted(() => {
-  console.log("hello calling function");
   try {
     // Fetch the user data from the store
     userStore.fetchUser();
@@ -104,7 +112,7 @@ onMounted(() => {
 /**
  * Signs out the user and redirects to the login page.
  */
-let handleSignOut = () => {
+const handleSignOut = () => {
   // Call the signOut function from the user store
   userStore.signOut();
   // Redirect to login page
@@ -117,7 +125,6 @@ let handleSignOut = () => {
   The handleSignOut function is used to log out the current user.
   - It calls the signOut function from the user store to clear user data.
   - It redirects the user to the login page.
-  - It updates the isUserloggedIn reactive variable to false.
   */
 
 // ------------------------------------------------------------------------
@@ -126,3 +133,7 @@ let handleSignOut = () => {
 
 // Additional lifecycle hooks such as onBeforeMount and onUpdated can be added here if needed.
 </script>
+
+<style scoped>
+/* Add your scoped styles here */
+</style>
